@@ -3,6 +3,7 @@ import { Footer } from '../components/footer';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { AuthProvider } from '@/context/AuthContext';
 import Navbar from '@/components/navbar';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
     title: {
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
                         </div>
                     </AuthProvider>
                 </ThemeProvider>
+                <Analytics />
             </body>
         </html>
     );
