@@ -1,43 +1,33 @@
-# Next.js on Netlify Platform Starter
+# 💕 Our App - A Couple's Website
 
-[Live Demo](https://nextjs-platform-starter.netlify.app/)
+A beautiful, private website designed for couples to share music, memories, messages, and love notes.
 
-A modern starter based on Next.js 16 (App Router), Tailwind, and [Netlify Core Primitives](https://docs.netlify.com/core/overview/#develop) (Edge Functions, Image CDN, Blob Store).
+## Quick Start
 
-In this site, Netlify Core Primitives are used both implictly for running Next.js features (e.g. Route Handlers, image optimization via `next/image`, and more) and also explicitly by the user code.
+1. **Set up Firebase & Neon** - See [SETUP.md](./SETUP.md) for detailed instructions
+2. **Install dependencies**: `npm install`
+3. **Create `.env.local`** with your credentials
+4. **Run dev server**: `npm run dev`
+5. Visit `http://localhost:3000`
 
-Implicit usage means you're using any Next.js functionality and everything "just works" when deployed - all the plumbing is done for you. Explicit usage is framework-agnostic and typically provides more features than what Next.js exposes.
+## Features
 
-## Deploying to Netlify
+- 🔐 Email/password authentication
+- 🎵 Music player with song management
+- 📸 Image gallery with uploads
+- 💬 Real-time chat messaging
+- 🎮 Mini click game
+- ✨ Love notes and surprises
+- 🌙 Dark/light theme toggle
+- 📱 Fully responsive design
 
-Click the button below to deploy this template to your Netlify account.
+## Tech Stack
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-platform-starter)
+- Next.js 16, React 19, Tailwind CSS
+- Firebase (Auth & Storage)
+- Neon PostgreSQL
+- Netlify
 
-## Developing Locally
+## Documentation
 
-1. Clone this repository, then run `npm install` in its root directory.
-
-2. For the starter to have full functionality locally (e.g. edge functions, blob store), please ensure you have an up-to-date version of Netlify CLI. Run:
-
-```
-npm install netlify-cli@latest -g
-```
-
-3. Link your local repository to the deployed Netlify site. This will ensure you're using the same runtime version for both local development and your deployed site.
-
-```
-netlify link
-```
-
-4. Then, run the Next.js development server via Netlify CLI:
-
-```
-netlify dev
-```
-
-If your browser doesn't navigate to the site automatically, visit [localhost:8888](http://localhost:8888).
-
-## Resources
-
-- Check out the [Next.js on Netlify docs](https://docs.netlify.com/frameworks/next-js/overview/)
+See [SETUP.md](./SETUP.md) for complete setup and customization guide.

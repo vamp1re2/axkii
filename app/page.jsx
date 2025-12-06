@@ -1,63 +1,70 @@
+'use client';
+
+import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
-import { Card } from 'components/card';
-import { ContextAlert } from 'components/context-alert';
-import { Markdown } from 'components/markdown';
-import { RandomQuote } from 'components/random-quote';
-import { getNetlifyContext } from 'utils';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-const contextExplainer = `
-The card below is rendered on the server based on the value of \`process.env.CONTEXT\` 
-([docs](https://docs.netlify.com/configure-builds/environment-variables/#build-metadata)):
-`;
+export default function Home() {
+    const { user, loading } = useAuth();
+    const router = useRouter();
 
-const preDynamicContentExplainer = `
-The card content below is fetched by the client-side from \`/quotes/random\` (see file \`app/quotes/random/route.js\`) with a different quote shown on each page load:
-`;
+    useEffect(() => {
+        if (!loading && !user) {
+            router.push('/login');
+        }
+    }, [user, loading, router]);
 
-const ctx = getNetlifyContext();
-
-export default function Page() {
-    return (
-        <div className="flex flex-col gap-12 sm:gap-16">
-            <section>
-                <ContextAlert className="mb-6" />
-                <h1 className="mb-4">Netlify Platform Starter – Next.js</h1>
-                <p className="mb-6 text-lg">
-                    Deploy the latest version of Next.js — including Turbopack, React Compiler, and the new caching APIs
-                    — on Netlify in seconds. No configuration or custom adapter required.
-                </p>
-                <Link href="https://docs.netlify.com/frameworks/next-js/overview/" className="btn btn-lg sm:min-w-64">
-                    Read the Docs
-                </Link>
-            </section>
-            {!!ctx && (
-                <section className="flex flex-col gap-4">
-                    <Markdown content={contextExplainer} />
-                    <RuntimeContextCard />
-                </section>
-            )}
-            <section className="flex flex-col gap-4">
-                <Markdown content={preDynamicContentExplainer} />
-                <RandomQuote />
-            </section>
-        </div>
-    );
-}
-
-function RuntimeContextCard() {
-    const title = `Netlify Context: running in ${ctx} mode.`;
-    if (ctx === 'dev') {
+    if (loading) {
         return (
-            <Card title={title}>
-                <p>Next.js will rebuild any page you navigate to, including static pages.</p>
-            </Card>
-        );
-    } else {
-        const now = new Date().toISOString();
-        return (
-            <Card title={title}>
-                <p>This page was statically-generated at build time ({now}).</p>
-            </Card>
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-color"></div>
+            </div>
         );
     }
+
+    if (!user) return null;
+
+    return (
+        <div className="container">
+            <div className="text-center py-12">
+                <h1 className="text-5xl font-bold mb-4">💕 Welcome to Our App</h1>
+                <p className="text-xl text-text-secondary mb-8">
+                    A special place just for us to share music, memories, and love
+                </p>
+
+                <div className="grid grid-1 md:grid-2 lg:grid-3 gap-6 mt-12">
+                    <Link href="/music" className="card">
+                        <div className="text-4xl mb-2">🎵</div>
+                        <h3 className="text-xl font-bold mb-2">Music</h3>
+                        <p>Share and play our favorite songs</p>
+                    </Link>
+
+                    <Link href="/gallery" className="card">
+                        <div className="text-4xl mb-2">📸</div>
+                        <h3 className="text-xl font-bold mb-2">Gallery</h3>
+                        <p>Our precious memories and moments</p>
+                    </Link>
+
+                    <Link href="/chat" className="card">
+                        <div className="text-4xl mb-2">💬</div>
+                        <h3 className="text-xl font-bold mb-2">Chat</h3>
+                        <p>Send messages anytime, anywhere</p>
+                    </Link>
+
+                    <Link href="/games" className="card">
+                        <div className="text-4xl mb-2">🎮</div>
+                        <h3 className="text-xl font-bold mb-2">Games</h3>
+                        <p>Play mini games together</p>
+                    </Link>
+
+                    <Link href="/extra" className="card">
+                        <div className="text-4xl mb-2">✨</div>
+                        <h3 className="text-xl font-bold mb-2">Extra</h3>
+                        <p>Love notes and special surprises</p>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
 }
